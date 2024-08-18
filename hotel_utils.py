@@ -48,8 +48,7 @@ def findMyHotel(dataframe, country, tags, sortBy, stars):
 
 
 def methods():
-    print("Dataframe : df")
-    print("Find hotel function : findMyHotel(dataframe, country{String}, tags{String array}, sortBy{int}, stars{int})")
+    return ("Find hotel function : findMyHotel(dataframe, country(string), tags(string array), sortBy(int), stars(int))")
 
 
 if __name__=="__main__":

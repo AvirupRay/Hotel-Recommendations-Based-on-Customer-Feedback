@@ -7,6 +7,7 @@ app=Flask(__name__)
 
 hotelModel=pickle.load(open("hotelModelPickle.pkl","rb"))
 
+
 @app.post("/findHotel")
 def findHotel():
     data=request.get_json()
@@ -18,14 +19,17 @@ def findHotel():
     result_df=findMyHotel(hotelModel,country,tags,sortBy,stars)
     return jsonify(result_df.to_dict(orient='records'))
 
+
 @app.get("/status")
 def status():
     return "Flask API Working"
 
+
 @app.get("/methods")
 def methodRoute():
-    methods()
-    return "hehe"
+    params=methods()
+    return params
+
 
 if __name__ == "__main__":
     app.run(debug=True,port=5000)
