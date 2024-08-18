@@ -44,6 +44,7 @@ def findMyHotel(dataframe, country, tags, sortBy, stars):
     result_df.drop_duplicates(['Hotel_Name','Average_Score','Stars'],inplace=True)
     result_df=result_df.head(10)
     print(result_df[['countries','Hotel_Name','Average_Score','Word_Score','Stars']])
+    return result_df[['countries','Hotel_Name','Average_Score','Word_Score','Stars']]
 
 
 def methods():
