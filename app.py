@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import pickle
 from hotel_utils import methods
 from hotel_utils import findMyHotel
@@ -7,9 +7,15 @@ app=Flask(__name__)
 
 hotelModel=pickle.load(open("hotelModelPickle.pkl","rb"))
 
-@app.get("/findHotel")
+@app.post("/findHotel")
 def findHotel():
-    result_df=findMyHotel(hotelModel,"AT",["couple","leisure trip"],1,0)
+    data=request.get_json()
+    country=data['country']
+    tags=data['tags']
+    sortBy=data['sortBy']
+    stars=data['stars']
+    print(country,tags,sortBy,stars)
+    result_df=findMyHotel(hotelModel,country,tags,sortBy,stars)
     return jsonify(result_df.to_dict(orient='records'))
 
 @app.get("/status")
