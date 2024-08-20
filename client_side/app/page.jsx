@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
 
@@ -8,7 +9,7 @@ const page = () => {
   const [fromNum, setFromNum] = useState(0);
   const [toNum, setToNum] = useState(0);
   //setting country
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState("NL");
   //setting stars
   const [stars, setStars] = useState(0);
   //setting sort
@@ -17,19 +18,24 @@ const page = () => {
   const [text, setText] = useState("");
   //submit
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (fromNum > toNum) {
       alert("From price should be less than to price");
       return;
     }
-    console.log("submitted");
-    console.log(stars);
-    console.log(fromNum);
-    console.log(toNum);
-    console.log(country);
-    console.log(sort);
-    console.log(text);
+    const data = {
+      country: country,
+      sortBy: sort,
+      stars: stars,
+      range: [fromNum, toNum],
+      description: text,
+    };
+    console.log(data);
+    await axios
+      .post("http://localhost:5000/findHotel3", data)
+      .then((res) => console.log(res.data))
+      .catch((e) => console.log(e));
   };
 
   return (

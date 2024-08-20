@@ -1,10 +1,12 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import pickle
 from hotel_utils import methods
 from hotel_utils import findMyHotel
 from hotel_utils import findMyHotel3
 
 app=Flask(__name__)
+CORS(app)
 
 hotelModel=pickle.load(open("server_side/hotelModelPickle.pkl","rb"))
 
