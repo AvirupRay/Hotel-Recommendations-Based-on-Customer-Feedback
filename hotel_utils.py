@@ -1,4 +1,3 @@
-import pickle
 import pandas as pd
 
 def findMyHotel(dataframe, country, tags, sortBy, stars):
@@ -41,7 +40,7 @@ def findMyHotel(dataframe, country, tags, sortBy, stars):
     
     
     #trimming and printing the result
-    result_df.drop_duplicates(['Hotel_Name','Average_Score','Stars'],inplace=True)
+    result_df.drop_duplicates(['Hotel_Name'],inplace=True)
     result_df=result_df.head(10)
     print(result_df[['countries','Hotel_Name','Average_Score','Word_Score','Stars']])
     return result_df[['countries','Hotel_Name','Average_Score','Word_Score','Stars']]
@@ -49,11 +48,3 @@ def findMyHotel(dataframe, country, tags, sortBy, stars):
 
 def methods():
     return ("Find hotel function : findMyHotel(dataframe, country(string), tags(string array), sortBy(int), stars(int))")
-
-
-if __name__=="__main__":
-    with open("hotelModelPickle.pkl","rb") as f:
-        hotelModel=pickle.load(f)
-    #findMyHotel(hotelModel,"AT",["couple","leisure trip"],0,5)
-    methods()
-    
