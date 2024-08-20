@@ -1,6 +1,6 @@
 import pandas as pd
 
-def findMyHotel(dataframe, country, tags, sortBy, stars):
+def findMyHotel(dataframe, country, tags, sortBy, stars, range):
     
     #country mask
     countryMask=dataframe['countries'].str.contains(country, case=False)
@@ -23,10 +23,18 @@ def findMyHotel(dataframe, country, tags, sortBy, stars):
             starMask=dataframe['Stars']==4
         elif stars==5 :
             starMask=dataframe['Stars']==5
+
+    
+    #price filtering
+    min=range[0]
+    max=range[1]
+    minPriceMask=dataframe['Price']>=min
+    maxPriceMask=dataframe['Price']<=max
+    combinedPriceMask=minPriceMask & maxPriceMask
     
 
     #final df
-    result_df=dataframe[combinedMask & countryMask & starMask]
+    result_df=dataframe[combinedMask & countryMask & starMask & combinedPriceMask]
 
 
     #sorting data based on filter
@@ -34,6 +42,8 @@ def findMyHotel(dataframe, country, tags, sortBy, stars):
         result_df=result_df.sort_values('Average_Score',ascending=False)
     elif sortBy==1:     #word score sorting
         result_df=result_df.sort_values('Word_Score',ascending=False)
+    elif sortBy==2:     #price sorting
+        result_df=result_df.sort_values('Price',ascending=True)
     else :
         print("wrong filter")
         return
@@ -42,8 +52,8 @@ def findMyHotel(dataframe, country, tags, sortBy, stars):
     #trimming and printing the result
     result_df.drop_duplicates(['Hotel_Name'],inplace=True)
     result_df=result_df.head(10)
-    print(result_df[['countries','Hotel_Name','Average_Score','Word_Score','Stars']])
-    return result_df[['countries','Hotel_Name','Average_Score','Word_Score','Stars']]
+    print(result_df[['countries','Hotel_Name','Average_Score','Word_Score','Stars','Price']])
+    return result_df[['countries','Hotel_Name','Average_Score','Word_Score','Stars','Price']]
 
 
 def methods():
