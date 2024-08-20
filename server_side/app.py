@@ -5,7 +5,7 @@ from hotel_utils import findMyHotel
 
 app=Flask(__name__)
 
-hotelModel=pickle.load(open("hotelModelPickle.pkl","rb"))
+hotelModel=pickle.load(open("server_side/hotelModelPickle.pkl","rb"))
 
 
 @app.post("/findHotel")
