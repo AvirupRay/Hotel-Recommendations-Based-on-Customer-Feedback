@@ -115,34 +115,34 @@ def findMyHotel3(dataframe,country,sortBy,stars,range,query):
     return result_df
 
 
-
-def findMyHotel4(df,country,sortBy,stars,range,query):
+def findMyHotel4(df, country, sortBy, stars, range, query):
 
     #country
-    countryMask=df['countries'].str.contains(country,case=False)
+    countryMask=df["countries"].str.contains(country,case=False)
 
-    #star filtering
+    #stars
     starMask=pd.Series([True]*len(df))
-    if stars!=0 :
-        if stars==3 :
+    if stars!=0:
+        if stars==3:
             starMask=df['Stars']==3
-        elif stars==4 :
+        elif stars==4:
             starMask=df['Stars']==4
-        elif stars==5 :
+        elif stars==5:
             starMask=df['Stars']==5
 
-    #price filtering
+    
+    #price
     min=range[0]
     max=range[1]
     minPriceMask=df['Price']>=min
     maxPriceMask=df['Price']<=max
     combinedPriceMask=minPriceMask & maxPriceMask
 
-    #filtered df
+    #filter
     filterDf=df[countryMask & starMask & combinedPriceMask]
     filterDf=filterDf.drop_duplicates(['Hotel_Name'])
 
-    #processing the text
+    #process text
     def processText(text):
         stopWords=set(stopwords.words("english"))
         words=word_tokenize(text)
@@ -151,34 +151,30 @@ def findMyHotel4(df,country,sortBy,stars,range,query):
         lemmatWords=[lemmat.lemmatize(i) for i in filterWords]
         return " ".join(lemmatWords)
     
-
-    #calling processText to process tags and the query
-    #df['Tags']=df['Tags'].apply(processText)
+    #processing the query
     queryText=processText(query)
 
-
+    #creating the vectors and finding cos product
     tfidf=TfidfVectorizer(stop_words="english")
-    tfMatrix=tfidf.fit_transform(filterDf['Tags'])
+    tfMatrix=tfidf.fit_transform(filterDf['Words'])
     queryVector=tfidf.transform([queryText.lower()])
     cosProd=cosine_similarity(queryVector,tfMatrix).flatten()
-    hotelsFound = cosProd.argsort()[-100:][::-1]
-    result_df=filterDf.iloc[hotelsFound]
+    hotelsFound=cosProd.argsort()[-100:][::-1]
+    resultDf=filterDf.iloc[hotelsFound]
 
-    if sortBy==0:                                                           #average score sorting
-        result_df=result_df.sort_values('Average_Score',ascending=False)
-    elif sortBy==1:                                                         #word score sorting
-        result_df=result_df.sort_values('Word_Score',ascending=False)
-    elif sortBy==2:                                                         #price sorting
-        result_df=result_df.sort_values('Price',ascending=True)
-    else :
-        print("wrong filter")
+    if sortBy==0:
+        resultDf=resultDf.sort_values('Average_Score',ascending=False)
+    elif sortBy==1:
+        resultDf=resultDf.sort_values('Reviewer_Score',ascending=False)
+    elif sortBy==2:
+        resultDf=resultDf.sort_values('Price',ascending=True)
+    else:
+        print("Wrong filter")
         return
     
-    
-    result_df=result_df.head(10)
-    print(result_df[["Hotel_Name","Tags","Average_Score","Word_Score","Stars","Price"]])
-    return result_df
-
+    resultDf=resultDf.head(10)
+    print(resultDf[['Hotel_Name','Average_Score','Reviewer_Score','countries','Stars','Price']])
+    return resultDf
 
 
 def methods():
