@@ -7,7 +7,7 @@ from hotel_utils import findMyHotel4
 app=Flask(__name__)
 CORS(app)
 
-hotelModel=pickle.load(open("hotelModel2.pkl","rb"))
+hotelModel=pickle.load(open("server_side/hotelModel2.pkl","rb"))
 
 @app.post("/findHotel4")
 def findHotel4():
