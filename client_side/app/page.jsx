@@ -3,6 +3,8 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import Image from "next/image";
+import img from "../public/image.png";
 
 const page = () => {
   // setting range
@@ -33,7 +35,7 @@ const page = () => {
     };
     console.log(data);
     await axios
-      .post("http://localhost:5000/findHotel3", data)
+      .post("http://localhost:5000/findHotel4", data)
       .then((res) => console.log(res.data))
       .catch((e) => console.log(e));
   };
@@ -43,14 +45,23 @@ const page = () => {
       {/* https://colorhunt.co/palette/1a363640534c677d6ad6bd98 */}
       {/* https://colorhunt.co/palette/f8ede3dfd3c3d0b8a8c5705d */}
       {/* body */}
-      <div className=" flex flex-col justify-center items-center w-full h-auto overflow-x-auto">
+      <div className=" flex flex-col justify-center items-center w-[100%] h-auto overflow-y-hidden">
         {/* first */}
-        <div className=" bg-white w-[100vw] h-[100vh] text-black">
-          <div>adad</div>
+        <div className="w-[100%] h-[100vh] text-black flex justify-center items-center">
+          <div className=" rounded-2xl h-auto w-auto object-fit bg-red-800 relative">
+            <Image
+              src={img}
+              alt="Picture of the author"
+              className="rounded-2xl"
+              width={1800}
+              height={1600}
+            />
+            <div className="bg-gradient-to-r to-transparent from-[rgba(0,0,0,0.9)] absolute z-10 w-full h-full top-0 rounded-2xl" />
+          </div>
         </div>
 
         {/* second */}
-        <div className=" w-[100vw] h-[100vh] flex bg-[#DFD3C3] justify-center items-center">
+        <div className=" w-[100%] h-[100vh] flex bg-[#DFD3C3] justify-center items-center">
           <div className="bg-[#D0B8A8] w-1/2 h-3/4 p-10 rounded-3xl flex justify-evenly items-center">
             <form action="">
               {/* country */}

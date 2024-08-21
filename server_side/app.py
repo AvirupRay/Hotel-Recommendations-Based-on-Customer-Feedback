@@ -25,7 +25,7 @@ def findHotel():
     return jsonify(result_df.to_dict(orient='records'))
 
 
-@app.post("/findHotel3")
+@app.post("/findHotel4")
 def findHotel3():
     data=request.get_json()
     country=data['country']

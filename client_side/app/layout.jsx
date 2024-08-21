@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className=" bg-[#F8EDE3] w-[100vw]">{children}</div>
+        <div className=" bg-[#F8EDE3] w-[100%]">{children}</div>
       </body>
     </html>
   );
