@@ -33,7 +33,7 @@ const page = () => {
     };
     console.log(data);
     await axios
-      .post("http://localhost:5000/findHotel3", data)
+      .post("http://localhost:5000/findHotel4", data)
       .then((res) => console.log(res.data))
       .catch((e) => console.log(e));
   };

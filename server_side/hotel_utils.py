@@ -1,4 +1,10 @@
 import pandas as pd
+
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -83,6 +89,7 @@ def findMyHotel3(dataframe,country,sortBy,stars,range,query):
 
     #filtered df
     filterDf=dataframe[countryMask & starMask & combinedPriceMask]
+    filterDf.drop_duplicates(['Hotel_Name'],inplace=True)
     
     
     tfidf=TfidfVectorizer(stop_words="english")                 #making tf idf vectorizer
@@ -102,10 +109,76 @@ def findMyHotel3(dataframe,country,sortBy,stars,range,query):
         print("wrong filter")
         return
     
-    result_df.drop_duplicates(['Hotel_Name'],inplace=True)
+    
     result_df=result_df.head(10)
     print(result_df[["Hotel_Name","Tags","Average_Score","Word_Score","Stars","Price"]])
     return result_df
+
+
+
+def findMyHotel4(df,country,sortBy,stars,range,query):
+
+    #country
+    countryMask=df['countries'].str.contains(country,case=False)
+
+    #star filtering
+    starMask=pd.Series([True]*len(df))
+    if stars!=0 :
+        if stars==3 :
+            starMask=df['Stars']==3
+        elif stars==4 :
+            starMask=df['Stars']==4
+        elif stars==5 :
+            starMask=df['Stars']==5
+
+    #price filtering
+    min=range[0]
+    max=range[1]
+    minPriceMask=df['Price']>=min
+    maxPriceMask=df['Price']<=max
+    combinedPriceMask=minPriceMask & maxPriceMask
+
+    #filtered df
+    filterDf=df[countryMask & starMask & combinedPriceMask]
+    filterDf=filterDf.drop_duplicates(['Hotel_Name'])
+
+    #processing the text
+    def processText(text):
+        stopWords=set(stopwords.words("english"))
+        words=word_tokenize(text)
+        filterWords=[i for i in words if i not in stopWords]
+        lemmat=WordNetLemmatizer()
+        lemmatWords=[lemmat.lemmatize(i) for i in filterWords]
+        return " ".join(lemmatWords)
+    
+
+    #calling processText to process tags and the query
+    #df['Tags']=df['Tags'].apply(processText)
+    queryText=processText(query)
+
+
+    tfidf=TfidfVectorizer(stop_words="english")
+    tfMatrix=tfidf.fit_transform(filterDf['Tags'])
+    queryVector=tfidf.transform([queryText.lower()])
+    cosProd=cosine_similarity(queryVector,tfMatrix).flatten()
+    hotelsFound = cosProd.argsort()[-100:][::-1]
+    result_df=filterDf.iloc[hotelsFound]
+
+    if sortBy==0:                                                           #average score sorting
+        result_df=result_df.sort_values('Average_Score',ascending=False)
+    elif sortBy==1:                                                         #word score sorting
+        result_df=result_df.sort_values('Word_Score',ascending=False)
+    elif sortBy==2:                                                         #price sorting
+        result_df=result_df.sort_values('Price',ascending=True)
+    else :
+        print("wrong filter")
+        return
+    
+    
+    result_df=result_df.head(10)
+    print(result_df[["Hotel_Name","Tags","Average_Score","Word_Score","Stars","Price"]])
+    return result_df
+
 
 
 def methods():
