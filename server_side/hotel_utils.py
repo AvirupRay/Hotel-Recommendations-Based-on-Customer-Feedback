@@ -153,6 +153,7 @@ def findMyHotel4(df, country, sortBy, stars, range, query):
     
     #processing the query
     queryText=processText(query)
+    print(queryText)
 
     #creating the vectors and finding cos product
     tfidf=TfidfVectorizer(stop_words="english")

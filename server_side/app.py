@@ -3,11 +3,13 @@ from flask_cors import CORS
 import pickle
 from hotel_utils import methods
 from hotel_utils import findMyHotel4
+import os
 
 app=Flask(__name__)
 CORS(app)
+path=os.path.dirname(__file__)
 
-hotelModel=pickle.load(open("server_side/hotelModel2.pkl","rb"))
+hotelModel=pickle.load(open(path+"/hotelModel2.pkl","rb"))
 
 @app.post("/findHotel4")
 def findHotel4():
