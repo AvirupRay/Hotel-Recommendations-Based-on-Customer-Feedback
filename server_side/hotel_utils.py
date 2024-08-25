@@ -173,7 +173,7 @@ def findMyHotel4(df, country, sortBy, stars, range, query):
         print("Wrong filter")
         return
     
-    resultDf=resultDf.head(10)
+    resultDf=resultDf.head(5)
     print(resultDf[['Hotel_Name','Average_Score','Reviewer_Score','countries','Stars','Price']])
     return resultDf
 
