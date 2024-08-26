@@ -1,7 +1,9 @@
-import { Inter } from "next/font/google";
+import { DM_Sans } from "next/font/google";
+import { Space_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const DM = DM_Sans({ subsets: ["latin"] });
+const space = Space_Mono({ subsets: ["latin"], weight: "400" });
 
 export const metadata = {
   title: "Next App",
@@ -10,8 +12,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={`${DM.variable} ${space.variable}`}>
+      <body>
         <div className="bg-[#ECE3D4] h-auto w-[100%]">{children}</div>
       </body>
     </html>
