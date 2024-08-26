@@ -198,7 +198,7 @@ const page = () => {
           <h1 className=" text-5xl font-mono font-bold text-[#291F0F]">
             Hotel Listings
           </h1>
-          <div className="flex flex-col gap-6 p-10 w-[80vw] h-[150vh]">
+          <div className="flex flex-col gap-6 p-10 w-[80vw] h-auto">
             {result.map((hotel) => (
               <Card hotel={hotel} />
             ))}
@@ -207,19 +207,25 @@ const page = () => {
         {/*  */}
         {/* third */}
         {/*  */}
-        <div className="h-[80vh] flex flex-col justify-center items-center w-full ">
+        <div className="h-[120vh] flex flex-col justify-center items-center w-full gap-5">
           <h1 className="text-5xl font-bold text-[#291F0F] font-sans">
             Popular Destination
           </h1>
           <p className=" font-mono">
             Explore the best hotels in top destinations.
           </p>
-          <div>
-            <div className="flex justify-center items-center ">
-              <div className="w-[16vw] bg-[#D4C3AA]">
+          <div className=" flex flex-col gap-10">
+            <div className="flex justify-center items-center gap-10">
+              <motion.div
+                className="w-[20vw] bg-[#D4C3AA] h-[46vh] overflow-hidden"
+                whileHover={
+                  ({ scale: 1.02 }, { boxShadow: "0px 0px 10px 0px #857359" })
+                }
+              >
                 <img
                   src="https://images.unsplash.com/photo-1646388264694-2c854514bd66?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG5ldGhlcmxhbmRzfGVufDB8fDB8fHww"
                   alt=""
+                  whileHover={{ scale: 1.2 }}
                 />
                 <h1 className=" font-sans text-2xl font-bold px-2">
                   Netherlands
@@ -228,74 +234,96 @@ const page = () => {
                   Discover the enchanting land of windmills and tulips. Book
                   your stay in the heart of the Netherlands today.
                 </p>
-              </div>
-              <div className="w-[16vw] bg-[#D4C3AA]">
+              </motion.div>
+              <motion.div
+                className="w-[20vw] bg-[#D4C3AA] h-[46vh] overflow-hidden "
+                whileHover={
+                  ({ scale: 1.02 }, { boxShadow: "0px 0px 10px 0px #857359" })
+                }
+              >
                 <img
-                  src="https://images.unsplash.com/photo-1646388264694-2c854514bd66?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG5ldGhlcmxhbmRzfGVufDB8fDB8fHww"
+                  src="https://images.unsplash.com/photo-1660814065563-943aada21d2e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt=""
                 />
                 <h1 className=" font-sans text-2xl font-bold px-2">
-                  Netherlands
+                  United Kingdom
                 </h1>
                 <p className="font-mono px-2">
-                  Discover the enchanting land of windmills and tulips. Book
-                  your stay in the heart of the Netherlands today.
+                  Experience the breathtaking landscapes of the United Kingdom.
+                  Explore rugged coastlines, rolling hills, and serene
+                  countryside.
                 </p>
-              </div>
-              <div className="w-[16vw] bg-[#D4C3AA]">
+              </motion.div>
+              <motion.div
+                className="w-[20vw] bg-[#D4C3AA] h-[46vh] overflow-hidden "
+                whileHover={
+                  ({ scale: 1.02 }, { boxShadow: "0px 0px 10px 0px #857359" })
+                }
+              >
                 <img
-                  src="https://images.unsplash.com/photo-1646388264694-2c854514bd66?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG5ldGhlcmxhbmRzfGVufDB8fDB8fHww"
+                  src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt=""
                 />
-                <h1 className=" font-sans text-2xl font-bold px-2">
-                  Netherlands
-                </h1>
+                <h1 className=" font-sans text-2xl font-bold px-2">France</h1>
                 <p className="font-mono px-2">
-                  Discover the enchanting land of windmills and tulips. Book
-                  your stay in the heart of the Netherlands today.
+                  Experience the magic of France. Find your perfect haven amidst
+                  picturesque vineyards and charming villages.
                 </p>
-              </div>
+              </motion.div>
             </div>
-          </div>
-          <div className="flex ">
-            <div className="w-[16vw] bg-[#D4C3AA]">
-              <img
-                src="https://images.unsplash.com/photo-1646388264694-2c854514bd66?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG5ldGhlcmxhbmRzfGVufDB8fDB8fHww"
-                alt=""
-              />
-              <h1 className=" font-sans text-2xl font-bold px-2">
-                Netherlands
-              </h1>
-              <p className="font-mono px-2">
-                Discover the enchanting land of windmills and tulips. Book your
-                stay in the heart of the Netherlands today.
-              </p>
-            </div>
-            <div className="w-[16vw] bg-[#D4C3AA]">
-              <img
-                src="https://images.unsplash.com/photo-1646388264694-2c854514bd66?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG5ldGhlcmxhbmRzfGVufDB8fDB8fHww"
-                alt=""
-              />
-              <h1 className=" font-sans text-2xl font-bold px-2">
-                Netherlands
-              </h1>
-              <p className="font-mono px-2">
-                Discover the enchanting land of windmills and tulips. Book your
-                stay in the heart of the Netherlands today.
-              </p>
-            </div>
-            <div className="w-[16vw] bg-[#D4C3AA]">
-              <img
-                src="https://images.unsplash.com/photo-1646388264694-2c854514bd66?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG5ldGhlcmxhbmRzfGVufDB8fDB8fHww"
-                alt=""
-              />
-              <h1 className=" font-sans text-2xl font-bold px-2">
-                Netherlands
-              </h1>
-              <p className="font-mono px-2">
-                Discover the enchanting land of windmills and tulips. Book your
-                stay in the heart of the Netherlands today.
-              </p>
+
+            {/* second row */}
+            <div className="flex gap-10">
+              <motion.div
+                className="w-[20vw] bg-[#D4C3AA] h-[46vh] overflow-hidden "
+                whileHover={
+                  ({ scale: 1.02 }, { boxShadow: "0px 0px 10px 0px #857359" })
+                }
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1509840841025-9088ba78a826?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt=""
+                />
+                <h1 className=" font-sans text-2xl font-bold px-2">Spain</h1>
+                <p className="font-mono px-2">
+                  Discover the vibrant culture and rich history of Spain. Book
+                  your stay and explore a world of flamenco, tapas, and ancient
+                  architecture.
+                </p>
+              </motion.div>
+              <motion.div
+                className="w-[20vw] bg-[#D4C3AA] h-[46vh] overflow-hidden "
+                whileHover={
+                  ({ scale: 1.02 }, { boxShadow: "0px 0px 10px 0px #857359" })
+                }
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1499678329028-101435549a4e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt=""
+                />
+                <h1 className=" font-sans text-2xl font-bold px-2">Italy</h1>
+                <p className="font-mono px-2">
+                  Discover the enchanting land of romance and culture. Book your
+                  stay in the heart of Italy today.
+                </p>
+              </motion.div>
+              <motion.div
+                className="w-[20vw] bg-[#D4C3AA] h-[46vh] overflow-hidden "
+                whileHover={
+                  ({ scale: 1.02 }, { boxShadow: "0px 0px 10px 0px #857359" })
+                }
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt=""
+                />
+                <h1 className=" font-sans text-2xl font-bold px-2">Austria</h1>
+                <p className="font-mono px-2">
+                  From the iconic Vienna State Opera to the breathtaking Alps,
+                  Austria offers a wealth of cultural experiences. Book your
+                  stay and discover it all.
+                </p>
+              </motion.div>
             </div>
           </div>
         </div>
