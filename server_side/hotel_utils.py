@@ -118,7 +118,10 @@ def findMyHotel3(dataframe,country,sortBy,stars,range,query):
 def findMyHotel4(df, country, sortBy, stars, range, query):
 
     #country
-    countryMask=df["countries"].str.contains(country,case=False)
+    if (country!="NA"):
+        countryMask=df["countries"].str.contains(country,case=False)
+    else:
+        countryMask=pd.Series([True]*len(df))
 
     #stars
     starMask=pd.Series([True]*len(df))
@@ -134,9 +137,12 @@ def findMyHotel4(df, country, sortBy, stars, range, query):
     #price
     min=range[0]
     max=range[1]
-    minPriceMask=df['Price']>=min
-    maxPriceMask=df['Price']<=max
-    combinedPriceMask=minPriceMask & maxPriceMask
+    if(min!=-1 & max!=-1):
+        minPriceMask=df['Price']>=min
+        maxPriceMask=df['Price']<=max
+        combinedPriceMask=minPriceMask & maxPriceMask
+    else:
+        combinedPriceMask=pd.Series([True]*len(df))
 
     #filter
     filterDf=df[countryMask & starMask & combinedPriceMask]
