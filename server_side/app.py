@@ -18,9 +18,10 @@ def findHotel4():
     sortBy=data['sortBy']
     stars=data['stars']
     range=data['range']
+    priceFilter=data['priceFilter']
     description=data['description']
     print(data)
-    result_df=findMyHotel4(hotelModel,country,sortBy,stars,range,description)
+    result_df=findMyHotel4(hotelModel,country,sortBy,stars,range,priceFilter,description)
     return jsonify(result_df.to_dict(orient='records'))
 
 

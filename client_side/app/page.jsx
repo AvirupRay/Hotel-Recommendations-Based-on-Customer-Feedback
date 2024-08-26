@@ -25,6 +25,7 @@ const page = () => {
   //result
   const [clicked, setClicked] = useState(false);
   const [price, setPrice] = useState(1500);
+  const [priceFilter, setPriceFilter] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,6 +39,7 @@ const page = () => {
       sortBy: sort,
       stars: stars,
       range: [fromNum, toNum],
+      priceFilter: priceFilter,
       description: text,
     };
     console.log(data);
@@ -63,6 +65,7 @@ const page = () => {
       sortBy: sort,
       stars: stars,
       range: [0, price],
+      priceFilter: priceFilter,
       description: text,
     };
 
@@ -91,9 +94,7 @@ const page = () => {
       {/* https://colorhunt.co/palette/f8ede3dfd3c3d0b8a8c5705d */}
       {/* body */}
       <div className=" flex flex-col justify-center items-center w-full h-auto overflow-y-hidden text-lg">
-        {/*  */}
         {/* first */}
-        {/*  */}
         <div className=" w-full h-[80vh] flex justify-center gap-10 items-center bg-[#D5B990]">
           {/* form */}
           <div className=" flex flex-col w-1/2 p-5 items-center justify-center">
@@ -235,10 +236,10 @@ const page = () => {
           <h1 className=" text-5xl font-mono font-bold text-[#291F0F]">
             Hotel Listings
           </h1>
-          <div className="h-fit w-full flex justify-center items-center">
+          <div className="h-fit w-full mt-4 flex justify-center items-center gap-8">
             {/* stars */}
-            <div className="flex flex-col w-1/3">
-              <label htmlFor="stars">Rating: </label>
+            <div className="flex flex-col w-1/4">
+              {/* <label htmlFor="stars">Rating: </label> */}
               <select
                 id="stars"
                 name="stars"
@@ -254,8 +255,7 @@ const page = () => {
 
             {/* sort */}
             <div className="w-1/3">
-              <label htmlFor="sort">Sort by:</label>
-              <br />
+              {/* <label htmlFor="sort">Sort by:</label> */}
               <select
                 id="sort"
                 name="sort"
@@ -268,14 +268,84 @@ const page = () => {
               </select>
             </div>
 
-            <input
-              type="range"
-              min="250"
-              max="1500"
-              step="10"
-              value={price}
-              onChange={(e) => setPrice(parseInt(e.target.value))}
-            />
+            <span className="h-fit w-fit flex justify-center items-center gap-4">
+              <input
+                type="range"
+                min="250"
+                max="1500"
+                step="10"
+                value={price}
+                onChange={(e) => setPrice(parseInt(e.target.value))}
+              />
+              <span>{price}</span>
+              <span
+                className="cursor-pointer"
+                onClick={() => {
+                  setSort(2);
+                  newSubmit();
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-search"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.3-4.3" />
+                </svg>
+              </span>
+              <span
+                className="cursor-pointer"
+                onClick={() => setPriceFilter(!priceFilter)}
+              >
+                {priceFilter ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-arrow-down-wide-narrow"
+                  >
+                    <path d="m3 16 4 4 4-4" />
+                    <path d="M7 20V4" />
+                    <path d="M11 4h10" />
+                    <path d="M11 8h7" />
+                    <path d="M11 12h4" />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-arrow-up-narrow-wide"
+                  >
+                    <path d="m3 8 4-4 4 4" />
+                    <path d="M7 4v16" />
+                    <path d="M11 12h4" />
+                    <path d="M11 16h7" />
+                    <path d="M11 20h10" />
+                  </svg>
+                )}
+              </span>
+            </span>
           </div>
           <div className="flex flex-col gap-6 p-10 w-[80vw] h-auto">
             {result.map((hotel) => (

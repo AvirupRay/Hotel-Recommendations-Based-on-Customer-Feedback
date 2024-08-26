@@ -115,7 +115,7 @@ def findMyHotel3(dataframe,country,sortBy,stars,range,query):
     return result_df
 
 
-def findMyHotel4(df, country, sortBy, stars, range, query):
+def findMyHotel4(df, country, sortBy, stars, range, priceFilter, query):
 
     #country
     if (country!="NA"):
@@ -174,7 +174,10 @@ def findMyHotel4(df, country, sortBy, stars, range, query):
     elif sortBy==1:
         resultDf=resultDf.sort_values('Reviewer_Score',ascending=False)
     elif sortBy==2:
-        resultDf=resultDf.sort_values('Price',ascending=True)
+        if priceFilter:
+            resultDf=resultDf.sort_values('Price',ascending=False)
+        else:
+            resultDf=resultDf.sort_values('Price',ascending=True)
     else:
         print("Wrong filter")
         return
