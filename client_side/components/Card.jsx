@@ -26,11 +26,22 @@ const Card = ({ hotel }) => {
         </div>
       </motion.div>
       <motion.div
-        className={` bg-[#D5B990] -mt-8 rounded-b-3xl scale-95 p-2 flex flex-col justify-center items-start gap-5`}
+        className={` bg-[#D5B990] -mt-8 rounded-b-3xl scale-95 p-5 flex justify-evenly items-start gap-5 overflow-y-hidden`}
         animate={{ height: clicked ? "15vh" : "0vh", opacity: clicked ? 1 : 0 }}
       >
-        <span className=" bg-[#B39B78] p-2 rounded-2xl"># Tags</span>
-        <h3 className="h-1/2 rounded-3xl px-10">{hotel.Tags}</h3>
+        <div className="w-1/2">
+          <span className=" bg-[#B39B78] p-2 rounded-2xl"># Tags</span>
+          <h3 className="h-1/2 p-2 rounded-2xl px-10 border-4 border-[#968264]">
+            {hotel.Tags}
+          </h3>
+        </div>
+        <span className=" h-full bg-[#685a43] w-[2px]" />
+        <div className="w-1/2">
+          <span className=" bg-[#B39B78] p-2 rounded-2xl">Top Review</span>
+          <h3 className="h-1/2 p-2 rounded-2xl px-10 border-4 border-[#968264]">
+            {hotel.Positive_Review}
+          </h3>
+        </div>
       </motion.div>
     </>
   );
