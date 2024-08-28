@@ -115,13 +115,10 @@ def findMyHotel3(dataframe,country,sortBy,stars,range,query):
     return result_df
 
 
-def findMyHotel4(df, country, sortBy, stars, range, priceFilter, query):
+def findMyHotel4(df, country, sortBy, stars, range, query):
 
     #country
-    if (country!="NA"):
-        countryMask=df["countries"].str.contains(country,case=False)
-    else:
-        countryMask=pd.Series([True]*len(df))
+    countryMask=df["countries"].str.contains(country,case=False)
 
     #stars
     starMask=pd.Series([True]*len(df))
@@ -137,12 +134,9 @@ def findMyHotel4(df, country, sortBy, stars, range, priceFilter, query):
     #price
     min=range[0]
     max=range[1]
-    if(min!=-1 & max!=-1):
-        minPriceMask=df['Price']>=min
-        maxPriceMask=df['Price']<=max
-        combinedPriceMask=minPriceMask & maxPriceMask
-    else:
-        combinedPriceMask=pd.Series([True]*len(df))
+    minPriceMask=df['Price']>=min
+    maxPriceMask=df['Price']<=max
+    combinedPriceMask=minPriceMask & maxPriceMask
 
     #filter
     filterDf=df[countryMask & starMask & combinedPriceMask]
@@ -174,10 +168,7 @@ def findMyHotel4(df, country, sortBy, stars, range, priceFilter, query):
     elif sortBy==1:
         resultDf=resultDf.sort_values('Reviewer_Score',ascending=False)
     elif sortBy==2:
-        if priceFilter:
-            resultDf=resultDf.sort_values('Price',ascending=False)
-        else:
-            resultDf=resultDf.sort_values('Price',ascending=True)
+        resultDf=resultDf.sort_values('Price',ascending=True)
     else:
         print("Wrong filter")
         return
