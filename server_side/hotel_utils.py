@@ -174,7 +174,7 @@ def findMyHotel4(df, country, sortBy, stars, range, query):
         return
     
     resultDf=resultDf.head(5)
-    print(resultDf[['Hotel_Name','Average_Score','Reviewer_Score','countries','Stars','Price']])
+    print(resultDf[['Hotel_Name','Words','Amenities']])
     return resultDf
 
 
