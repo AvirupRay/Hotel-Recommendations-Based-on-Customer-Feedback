@@ -401,7 +401,7 @@ const page = () => {
         {/*  */}
         <div
           className={`${
-            clicked2 ? "h-[260vh] opacity-100" : "h-0 opacity-0"
+            clicked2 ? "h-auto opacity-100" : "h-0 opacity-0"
           } mt-10`}
         >
           <h1 className=" text-5xl font-mono font-bold text-[#291F0F]">
