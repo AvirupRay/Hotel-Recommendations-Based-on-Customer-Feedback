@@ -100,7 +100,11 @@ const page = () => {
         {/*  */}
         <div className=" w-full h-[80vh] flex justify-center gap-10 items-center bg-[#D5B990]">
           {/* form */}
-          <div className=" flex flex-col w-1/2 p-5 items-center justify-center">
+          <motion.div
+            className=" flex flex-col w-1/2 p-5 items-center justify-center"
+            initial={{ y: 1000 }}
+            animate={{ y: 0 }}
+          >
             <motion.h1
               className=" text-5xl font-mono font-bold text-[#291F0F]"
               initial={{ y: -1000 }}
@@ -226,7 +230,7 @@ const page = () => {
                 <b> Submit </b>
               </motion.button>
             </motion.form>
-          </div>
+          </motion.div>
           {/* image */}
           <motion.div
             className=" w-1/2"
@@ -408,7 +412,7 @@ const page = () => {
         {/*  */}
         {/* fifth */}
         {/*  */}
-        <div className="h-[120vh] flex flex-col justify-center items-center w-full gap-5 bg-[#D4C3AA]">
+        <div className="h-auto flex flex-col justify-center items-center w-full gap-5 bg-[#D4C3AA]">
           <motion.h1
             whileInView={{ opacity: 1, scale: 1 }}
             className="text-5xl font-bold text-[#291F0F] font-sans"
