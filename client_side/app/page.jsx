@@ -98,17 +98,18 @@ const page = () => {
         {/*  */}
         {/* first */}
         {/*  */}
-        <div className=" w-full h-[80vh] flex justify-center gap-10 items-center bg-[#D5B990]">
+        <motion.div
+          className=" w-full h-[80vh] flex justify-center gap-10 items-center bg-[#D5B990]"
+          initial={{ scaleY: 2 }}
+          animate={{ scaleY: 1 }}
+        >
           {/* form */}
-          <motion.div
-            className=" flex flex-col w-1/2 p-5 items-center justify-center"
-            initial={{ y: 1000 }}
-            animate={{ y: 0 }}
-          >
+          <div className=" flex flex-col w-1/2 p-5 items-center justify-center">
             <motion.h1
               className=" text-5xl font-mono font-bold text-[#291F0F]"
               initial={{ y: -1000 }}
               animate={{ y: 0 }}
+              transition={{ duration: 0.5 }}
             >
               Find Your Perfect Hotel
             </motion.h1>
@@ -116,6 +117,7 @@ const page = () => {
               className=" font-mono"
               initial={{ y: -1000 }}
               animate={{ y: 0 }}
+              transition={{ duration: 0.5 }}
             >
               Discover the best hotels for your next trip.
             </motion.h5>
@@ -125,6 +127,7 @@ const page = () => {
               "
               initial={{ x: -1000 }}
               animate={{ x: 0 }}
+              transition={{ duration: 0.5 }}
             >
               <div className="flex flex-row items-center justify-center gap-8 w-full">
                 {/* country */}
@@ -230,12 +233,13 @@ const page = () => {
                 <b> Submit </b>
               </motion.button>
             </motion.form>
-          </motion.div>
+          </div>
           {/* image */}
           <motion.div
             className=" w-1/2"
             initial={{ x: 2000 }}
             animate={{ x: 0 }}
+            transition={{ duration: 0.5 }}
           >
             <Image
               src={img}
@@ -244,7 +248,7 @@ const page = () => {
               className=" object-cover"
             />
           </motion.div>
-        </div>
+        </motion.div>
         {/*  */}
         {/* second */}
         {/*  */}
