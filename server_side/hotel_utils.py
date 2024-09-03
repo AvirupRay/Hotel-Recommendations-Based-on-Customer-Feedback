@@ -140,7 +140,7 @@ def findMyHotel4(df, country, sortBy, stars, range, query):
 
     #filter
     filterDf=df[countryMask & starMask & combinedPriceMask]
-    filterDf=filterDf.drop_duplicates(['Hotel_Name'])
+    filterDf=filterDf.sort_values(['Reviewer_Score','Hotel_Name'],ascending=[False,True]).drop_duplicates(['Hotel_Name'],keep='first')
 
     #process text
     def processText(text):
@@ -174,7 +174,7 @@ def findMyHotel4(df, country, sortBy, stars, range, query):
         return
     
     resultDf=resultDf.head(5)
-    print(resultDf[['Hotel_Name','Average_Score','Reviewer_Score','countries','Stars','Price']])
+    print(resultDf[['Hotel_Name','Average_Score','Reviewer_Score','Stars','Price']])
     return resultDf
 
 
