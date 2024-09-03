@@ -3,6 +3,7 @@ from flask_cors import CORS
 import pickle
 from hotel_utils import methods
 from hotel_utils import findMyHotel4
+from hotel_utils import hotelCountry
 import os
 
 app=Flask(__name__)
@@ -22,6 +23,15 @@ def findHotel4():
     print(data)
     result_df=findMyHotel4(hotelModel,country,sortBy,stars,range,description)
     return jsonify(result_df.to_dict(orient='records'))
+
+
+@app.post("/hotelCountry")
+def hotelCountryRoute():
+    data=request.get_json()
+    country=data['country']
+    print(data)
+    resultDf=hotelCountry(hotelModel,country)
+    return jsonify(resultDf.to_dict(orient='records'))
 
 
 @app.get("/status")

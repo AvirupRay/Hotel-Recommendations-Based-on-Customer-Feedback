@@ -26,6 +26,8 @@ const page = () => {
   const [result, setResult] = useState([]);
   //result
   const [clicked, setClicked] = useState(false);
+  //country top
+  const [countryHotel, setCountryHotel] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +49,20 @@ const page = () => {
       .then((res) => {
         console.log(res.data);
         setResult(res.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const hotelCountry = async (country) => {
+    const data = {
+      country: country,
+    };
+    console.log(data);
+    await axios
+      .post("http://localhost:5000/hotelCountry", data)
+      .then((res) => {
+        console.log(res.data);
+        setCountryHotel(res.data);
       })
       .catch((e) => console.log(e));
   };
@@ -223,6 +239,7 @@ const page = () => {
                 whileHover={
                   ({ scale: 1.02 }, { boxShadow: "0px 0px 10px 0px #857359" })
                 }
+                onClick={() => hotelCountry("NL")}
               >
                 <img
                   src="https://images.unsplash.com/photo-1646388264694-2c854514bd66?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG5ldGhlcmxhbmRzfGVufDB8fDB8fHww"
@@ -242,6 +259,7 @@ const page = () => {
                 whileHover={
                   ({ scale: 1.02 }, { boxShadow: "0px 0px 10px 0px #857359" })
                 }
+                onClick={() => hotelCountry("UK")}
               >
                 <img
                   src="https://images.unsplash.com/photo-1660814065563-943aada21d2e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -261,6 +279,7 @@ const page = () => {
                 whileHover={
                   ({ scale: 1.02 }, { boxShadow: "0px 0px 10px 0px #857359" })
                 }
+                onClick={() => hotelCountry("FR")}
               >
                 <img
                   src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -281,6 +300,7 @@ const page = () => {
                 whileHover={
                   ({ scale: 1.02 }, { boxShadow: "0px 0px 10px 0px #857359" })
                 }
+                onClick={() => hotelCountry("ES")}
               >
                 <img
                   src="https://images.unsplash.com/photo-1509840841025-9088ba78a826?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -298,6 +318,7 @@ const page = () => {
                 whileHover={
                   ({ scale: 1.02 }, { boxShadow: "0px 0px 10px 0px #857359" })
                 }
+                onClick={() => hotelCountry("IT")}
               >
                 <img
                   src="https://images.unsplash.com/photo-1499678329028-101435549a4e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -314,6 +335,7 @@ const page = () => {
                 whileHover={
                   ({ scale: 1.02 }, { boxShadow: "0px 0px 10px 0px #857359" })
                 }
+                onClick={() => hotelCountry("AT")}
               >
                 <img
                   src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

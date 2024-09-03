@@ -8,111 +8,6 @@ from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-def findMyHotel(dataframe, country, tags, sortBy, stars, range):
-    
-    #country mask
-    countryMask=dataframe['countries'].str.contains(country, case=False)
-
-
-    #tag masks
-    tagMasks=[dataframe['Tags'].str.contains(eachTag, case=False) for eachTag in tags]
-    combinedMask=pd.Series([True]*len(dataframe))
-    #combining tag masks
-    for eachMask in tagMasks:
-        combinedMask &= eachMask
-    
-
-    #star filtering
-    starMask=pd.Series([True]*len(dataframe))
-    if stars!=0 :
-        if stars==3 :
-            starMask=dataframe['Stars']==3
-        elif stars==4 :
-            starMask=dataframe['Stars']==4
-        elif stars==5 :
-            starMask=dataframe['Stars']==5
-
-    
-    #price filtering
-    min=range[0]
-    max=range[1]
-    minPriceMask=dataframe['Price']>=min
-    maxPriceMask=dataframe['Price']<=max
-    combinedPriceMask=minPriceMask & maxPriceMask
-    
-
-    #final df
-    result_df=dataframe[combinedMask & countryMask & starMask & combinedPriceMask]
-
-
-    #sorting data based on filter
-    if sortBy==0:       #average score sorting
-        result_df=result_df.sort_values('Average_Score',ascending=False)
-    elif sortBy==1:     #word score sorting
-        result_df=result_df.sort_values('Word_Score',ascending=False)
-    elif sortBy==2:     #price sorting
-        result_df=result_df.sort_values('Price',ascending=True)
-    else :
-        print("wrong filter")
-        return
-    
-    
-    #trimming and printing the result
-    result_df.drop_duplicates(['Hotel_Name'],inplace=True)
-    result_df=result_df.head(10)
-    print(result_df[['countries','Hotel_Name','Average_Score','Word_Score','Stars','Price']])
-    return result_df[['countries','Hotel_Name','Average_Score','Word_Score','Stars','Price']]
-
-
-
-def findMyHotel3(dataframe,country,sortBy,stars,range,query):
-
-    #country mask
-    countryMask=dataframe['countries'].str.contains(country,case=False)
-
-    #star filtering
-    starMask=pd.Series([True]*len(dataframe))
-    if stars!=0 :
-        if stars==3 :
-            starMask=dataframe['Stars']==3
-        elif stars==4 :
-            starMask=dataframe['Stars']==4
-        elif stars==5 :
-            starMask=dataframe['Stars']==5
-
-    #price filtering
-    min=range[0]
-    max=range[1]
-    minPriceMask=dataframe['Price']>=min
-    maxPriceMask=dataframe['Price']<=max
-    combinedPriceMask=minPriceMask & maxPriceMask
-
-    #filtered df
-    filterDf=dataframe[countryMask & starMask & combinedPriceMask]
-    filterDf.drop_duplicates(['Hotel_Name'],inplace=True)
-    
-    
-    tfidf=TfidfVectorizer(stop_words="english")                 #making tf idf vectorizer
-    tfMatrix=tfidf.fit_transform(filterDf['Tags'])              #convert tags to vectors
-    queryVector=tfidf.transform([query.lower()])                #making the queryVector
-    cosProd=cosine_similarity(queryVector,tfMatrix).flatten()   #cos product of query and tags
-    hotelsFound = cosProd.argsort()[-100:][::-1]                #getting indices of hotels found
-    result_df=filterDf.iloc[hotelsFound]                        #filtering dataframe based on indices from cos product
-
-    if sortBy==0:                                                           #average score sorting
-        result_df=result_df.sort_values('Average_Score',ascending=False)
-    elif sortBy==1:                                                         #word score sorting
-        result_df=result_df.sort_values('Word_Score',ascending=False)
-    elif sortBy==2:                                                         #price sorting
-        result_df=result_df.sort_values('Price',ascending=True)
-    else :
-        print("wrong filter")
-        return
-    
-    
-    result_df=result_df.head(10)
-    print(result_df[["Hotel_Name","Tags","Average_Score","Word_Score","Stars","Price"]])
-    return result_df
 
 
 def findMyHotel4(df, country, sortBy, stars, range, query):
@@ -140,7 +35,7 @@ def findMyHotel4(df, country, sortBy, stars, range, query):
 
     #filter
     filterDf=df[countryMask & starMask & combinedPriceMask]
-    filterDf=filterDf.sort_values(['Reviewer_Score','Hotel_Name'],ascending=[False,True]).drop_duplicates(['Hotel_Name'],keep='first')
+    filterDf=filterDf.sort_values(['Average_Score','Hotel_Name'],ascending=[False,True]).drop_duplicates(['Hotel_Name'],keep='first')
 
     #process text
     def processText(text):
@@ -176,6 +71,18 @@ def findMyHotel4(df, country, sortBy, stars, range, query):
     resultDf=resultDf.head(5)
     print(resultDf[['Hotel_Name','Average_Score','Reviewer_Score','Stars','Price']])
     return resultDf
+
+
+
+def hotelCountry(df,country):
+
+    countryMask=df['countries'].str.contains(country,case=False)
+
+    filterDf=df[countryMask]
+    filterDf=filterDf.sort_values(['Average_Score','Hotel_Name'],ascending=[False,True]).drop_duplicates(['Hotel_Name'],keep='first')
+    filterDf=filterDf.head(15)
+    return filterDf
+
 
 
 def methods():
