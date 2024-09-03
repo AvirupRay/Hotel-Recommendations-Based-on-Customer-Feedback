@@ -5,8 +5,10 @@ import React from "react";
 import { useState } from "react";
 import Image from "next/image";
 import img from "../public/room2.jpg";
+import hotel1 from "../public/room.jpg";
 import Card from "@/components/Card";
 import { motion } from "framer-motion";
+import { GoPerson } from "react-icons/go";
 
 const page = () => {
   // setting range
@@ -325,6 +327,115 @@ const page = () => {
                 </p>
               </motion.div>
             </div>
+          </div>
+        </div>
+        {/* fourth */}
+        {/*  */}
+        {/*  */}
+        <div className="h-[120vh] flex flex-col justify-center items-center w-full gap-5 bg-[#D4C3AA]">
+          <motion.h1
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="text-5xl font-bold text-[#291F0F] font-sans"
+          >
+            Popular Destination
+          </motion.h1>
+          <p className=" font-mono">
+            Explore the best hotels in top destinations.
+          </p>
+          <div className=" flex flex-col gap-10">
+            <motion.div
+              whileInView={{ opacity: 1, scale: 1 }}
+              className="flex justify-center items-center gap-10"
+            >
+              <motion.div
+                className="w-[25vw] bg-[#E6D5BC] h-[60vh] overflow-hidden flex flex-col justify-start items-center py-10 border-2 border-[#C7A26B]"
+                whileHover={
+                  ({ scale: 1.2 }, { boxShadow: "0px 0px 10px 0px #857359" })
+                }
+              >
+                <Image
+                  src={hotel1}
+                  width={800}
+                  alt="Hotel"
+                  className=" object-cover mb-10"
+                />
+                <div className="flex items-center justify-between w-[80%] mb-5">
+                  <h1 className=" font-sans text-2xl font-bold px-2">
+                    The Grand Hotel
+                  </h1>
+                  <p>⭐ 4.9</p>
+                </div>
+
+                <p className="font-mono px-2 w-[80%] mb-5">
+                  Luxurious accommodations in the heart of the city
+                </p>
+                <div className="flex items-center justify-between w-[80%]">
+                  <span className="flex items-center gap-2">
+                    <GoPerson className="text-[#291F0F] text-2xl" />{" "}
+                    <p className="font-semibold text-[#291F0F]">2 persons</p>
+                  </span>
+                  <span className="font-semibold text-[#291F0F]">€250</span>
+                </div>
+              </motion.div>
+              <motion.div
+                className="w-[25vw] bg-[#E6D5BC] h-[60vh] overflow-hidden flex flex-col justify-start items-center py-10 border-2 border-[#C7A26B]"
+                whileHover={
+                  ({ scale: 1.2 }, { boxShadow: "0px 0px 10px 0px #857359" })
+                }
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1455587734955-081b22074882?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt=""
+                  className=" object-cover mb-10"
+                />
+                <div className="flex items-center justify-between w-[80%] mb-5">
+                  <h1 className=" font-sans text-2xl font-bold px-2">
+                    The Ritz-Carlton
+                  </h1>
+                  <p>⭐ 4.7</p>
+                </div>
+
+                <p className="font-mono px-2 w-[80%] mb-5">
+                  Elegant and luxurious hotel with stunning views.
+                </p>
+                <div className="flex items-center justify-between w-[80%]">
+                  <span className="flex items-center gap-2">
+                    <GoPerson className="text-[#291F0F] text-2xl" />{" "}
+                    <p className="font-semibold text-[#291F0F]">2 persons</p>
+                  </span>
+                  <span className="font-semibold text-[#291F0F]">€180</span>
+                </div>
+              </motion.div>
+              <motion.div
+                className="w-[25vw] bg-[#E6D5BC] h-[60vh] overflow-hidden flex flex-col justify-start items-center py-10 border-2 border-[#C7A26B]"
+                whileHover={
+                  ({ scale: 1.2 }, { boxShadow: "0px 0px 10px 0px #857359" })
+                }
+              >
+                <img
+                  src="https://plus.unsplash.com/premium_photo-1687960116497-0dc41e1808a2?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt=""
+                  className=" object-cover mb-10"
+                />
+                <div className="flex items-center justify-between w-[80%] mb-5">
+                  <h1 className=" font-sans text-2xl font-bold px-2">
+                    The Westin
+                  </h1>
+                  <p>⭐ 4.8</p>
+                </div>
+
+                <p className="font-mono px-2 w-[80%] mb-5">
+                  Modern and comfortable hotel with great amenities.
+                </p>
+                <div className="flex items-center justify-between w-[80%]">
+                  <span className="flex items-center gap-2">
+                    <GoPerson className="text-[#291F0F] text-2xl" />{" "}
+                    <p className="font-semibold text-[#291F0F]">2 persons</p>
+                  </span>
+                  <span className="font-semibold text-[#291F0F]">€200</span>
+                </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
