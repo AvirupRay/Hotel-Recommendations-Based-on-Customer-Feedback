@@ -7,6 +7,7 @@ import Image from "next/image";
 import img from "../public/room2.jpg";
 import hotel1 from "../public/room.jpg";
 import Card from "@/components/Card";
+import Card2 from "@/components/Card2";
 import { motion } from "framer-motion";
 import { GoPerson } from "react-icons/go";
 
@@ -26,8 +27,11 @@ const page = () => {
   const [result, setResult] = useState([]);
   //result
   const [clicked, setClicked] = useState(false);
+  const [clicked2, setClicked2] = useState(false);
   //country top
   const [countryHotel, setCountryHotel] = useState([]);
+  //country name
+  const [countryName, setCountryName] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,6 +58,8 @@ const page = () => {
   };
 
   const hotelCountry = async (country) => {
+    setClicked2(true);
+    setCountryName(country);
     const data = {
       country: country,
     };
@@ -65,6 +71,22 @@ const page = () => {
         setCountryHotel(res.data);
       })
       .catch((e) => console.log(e));
+  };
+
+  const displayCountry = (country) => {
+    if (country === "NL") {
+      return "Netherlands";
+    } else if (country === "UK") {
+      return "United Kingdom";
+    } else if (country === "FR") {
+      return "France";
+    } else if (country === "ES") {
+      return "Spain";
+    } else if (country === "IT") {
+      return "Italy";
+    } else if (country === "AT") {
+      return "Austria";
+    }
   };
 
   return (
@@ -79,16 +101,26 @@ const page = () => {
         <div className=" w-full h-[80vh] flex justify-center gap-10 items-center bg-[#D5B990]">
           {/* form */}
           <div className=" flex flex-col w-1/2 p-5 items-center justify-center">
-            <h1 className=" text-5xl font-mono font-bold text-[#291F0F]">
+            <motion.h1
+              className=" text-5xl font-mono font-bold text-[#291F0F]"
+              initial={{ y: -1000 }}
+              animate={{ y: 0 }}
+            >
               Find Your Perfect Hotel
-            </h1>
-            <h5 className=" font-mono">
+            </motion.h1>
+            <motion.h5
+              className=" font-mono"
+              initial={{ y: -1000 }}
+              animate={{ y: 0 }}
+            >
               Discover the best hotels for your next trip.
-            </h5>
-            <form
+            </motion.h5>
+            <motion.form
               action=""
               className="bg-[#C3A983] p-14 pr-24 flex flex-col items-center justify-center gap-4 font-sans
               "
+              initial={{ x: -1000 }}
+              animate={{ x: 0 }}
             >
               <div className="flex flex-row items-center justify-center gap-8 w-full">
                 {/* country */}
@@ -193,24 +225,28 @@ const page = () => {
               >
                 <b> Submit </b>
               </motion.button>
-            </form>
+            </motion.form>
           </div>
           {/* image */}
-          <div className=" w-1/2">
+          <motion.div
+            className=" w-1/2"
+            initial={{ x: 2000 }}
+            animate={{ x: 0 }}
+          >
             <Image
               src={img}
               width={800}
               alt="Hotel"
               className=" object-cover"
             />
-          </div>
+          </motion.div>
         </div>
         {/*  */}
         {/* second */}
         {/*  */}
         <div
           className={`${
-            clicked ? "h-[156vh] opacity-100" : "h-0 opacity-0"
+            clicked ? "h-auto opacity-100" : "h-0 opacity-0"
           } mt-10`}
         >
           <h1 className=" text-5xl font-mono font-bold text-[#291F0F]">
@@ -351,8 +387,26 @@ const page = () => {
             </div>
           </div>
         </div>
+
+        {/*  */}
         {/* fourth */}
         {/*  */}
+        <div
+          className={`${
+            clicked2 ? "h-[260vh] opacity-100" : "h-0 opacity-0"
+          } mt-10`}
+        >
+          <h1 className=" text-5xl font-mono font-bold text-[#291F0F]">
+            Popular Hotels in {displayCountry(countryName)}
+          </h1>
+          <div className="flex flex-col gap-6 p-10 w-[80vw] h-auto">
+            {countryHotel.map((hotel) => (
+              <Card2 hotel={hotel} />
+            ))}
+          </div>
+        </div>
+        {/*  */}
+        {/* fifth */}
         {/*  */}
         <div className="h-[120vh] flex flex-col justify-center items-center w-full gap-5 bg-[#D4C3AA]">
           <motion.h1
